@@ -29,7 +29,7 @@ def draw_menu():
     if index >= len(MENU):
       break
 
-    y = 40 + i * 24
+    y = 25 + i * 20 # Difference in y position for each item
 
     # Highlight selected item
     if index == selected:
