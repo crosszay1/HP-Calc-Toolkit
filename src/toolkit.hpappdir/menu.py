@@ -5,9 +5,18 @@ from hpprime import *
 import builtins
 
 #Constants
-MENU = [
-  1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-]
+MENU = {
+  1: "1",
+  2: "2",
+  3: "3",
+  4: "4",
+  5: "5",
+  6: "6",
+  7: "7",
+  8: "8",
+  9: "9",
+  10: "10"
+}
 VISIBLE = 10
 selected = 0
 top = 0
@@ -43,13 +52,14 @@ def draw_menu():
   dimgrob(1, 320, 240, 0xFFFFFF)
 
   # Draw title
-  eval('textout_p("MENU",G1,10,8,6,#000000)')
+  eval('textout_p("Dev Menu",G1,10,8,6,#000000)')
 
   # Draw menu items
   for i in range(VISIBLE):
     index = top + i
+    items = sorted(MENU.keys())
 
-    if index >= len(MENU):
+    if index >= len(items):
       break
 
     y = 25 + i * 20 # Difference in y position for each item
@@ -59,13 +69,13 @@ def draw_menu():
       fillrect(1, 5, y - 2, 310, 22, 0xCCCCCC, 0xCCCCCC)
       eval(
         'textout_p(">{0}",G1,15,{1},4,#000000)'.format(
-          MENU[index], y
+          MENU[items[index]], y
         )
       )
     else:
       eval(
         'textout_p("{0}",G1,25,{1},4,#000000)'.format(
-          MENU[index], y
+          MENU[items[index]], y
         )
       )
 
@@ -117,7 +127,8 @@ while True:
 
   # SELECT / CENTER
   elif key == 30:
-    run_script(MENU[selected])
+    items = list(MENU.keys())
+    run_script(MENU[items[selected]])
 
   # Wait for key release
   while eval('getkey') != -1:
