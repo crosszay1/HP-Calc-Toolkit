@@ -9,10 +9,21 @@ top = 0
 
 
 class UI:
+  INPUT_VAR = "PyInputStr"
+
   @staticmethod
-  def getinput(): # Abstraction for getting user input
-    #TODO: Implement so there is a GUI text box shown in the middle of the screen for user input. Pressing enter on the calculator submits it and closes the box
-    pass
+  def getinput(message="", title="Input", default=""): # Abstraction for getting user input
+    while eval('getkey') != -1:
+      pass
+    eval('{0}:="{1}"'.format(UI.INPUT_VAR, default))
+    ok = eval('INPUT({0},"{1}","{2}","ENTER to confirm, ESC to cancel")'.format(
+      UI.INPUT_VAR, title, message
+    ))
+
+    if not ok:
+      return default
+
+    return eval(UI.INPUT_VAR)
 
   @staticmethod
   def sendNotification(message: str): # Sends notifcations. 
@@ -48,25 +59,25 @@ class UI:
     # Draw menu items
     for i in range(VISIBLE):
       index = top + i
-      items = sorted(MENU.keys())
 
-      if index >= len(items):
+      if index >= len(MENU):
         break
 
       y = 25 + i * 20 # Difference in y position for each item
+      item = MENU[index]
 
       # Highlight selected item
       if index == selected:
         fillrect(1, 5, y - 2, 310, 22, 0xCCCCCC, 0xCCCCCC)
         eval(
           'textout_p(">{0}",G1,15,{1},4,#000000)'.format(
-            MENU[items[index]], y
+            item.display, y
           )
         )
       else:
         eval(
           'textout_p("{0}",G1,25,{1},4,#000000)'.format(
-            MENU[items[index]], y
+            item.display, y
           )
         )
 

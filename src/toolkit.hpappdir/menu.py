@@ -3,25 +3,33 @@ from math import *
 from urandom import *
 from hpprime import *
 import builtins
+import ui
+from ui import UI
 
-#Constants
-MENU = {
-  1: "1",
-  2: "2",
-  3: "3",
-  4: "4",
-  5: "5",
-  6: "6",
-  7: "7",
-  8: "8",
-  9: "9",
-  10: "10"
-}
+# Constants
+class MenuItem:
+  def __init__(self, name, display, action):
+    self.name = name
+    self.display = display
+    self.action = action
+
+
+def input_test():
+  UI.getinput("This is a test of the input box. Type something and press Enter.", "Input Test", "Default text")
+  sendNotification("Input test completed. You typed: " + eval(UI.INPUT_VAR)) # TODO: Fix text overflowing
+
+
+def notif_test():
+  sendNotification("Notification test selected")
+
+
+MENU = [
+  MenuItem("input_test", "Input test", input_test),
+  MenuItem("notif_test", "Notification test", notif_test),
+]
 
 VISIBLE = 10 # Number of items visible at once
 
-import ui
-from ui import UI
 
 draw_menu = UI.draw_menu
 getinput = UI.getinput
@@ -65,8 +73,7 @@ while True:
 
   # SELECT / CENTER
   elif key == 30:
-    items = list(MENU.keys())
-    run_script(MENU[items[ui.selected]])
+    MENU[ui.selected].action()
 
   # Wait for key release
   while eval('getkey') != -1:
