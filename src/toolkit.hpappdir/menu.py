@@ -1,17 +1,18 @@
-from uio import *
 from math import *
-from urandom import *
-from hpprime import *
-import builtins
+
 import ui
+from hpprime import *
 from ui import UI
+from uio import *
+from urandom import *
+
 
 # Constants
 class MenuItem:
-  def __init__(self, name, display, action):
+  def __init__(self, name, display, script):
     self.name = name
     self.display = display
-    self.action = action
+    self.script = script
 
 
 def input_test():
@@ -59,8 +60,7 @@ while True:
       ui.selected -= 1
 
       # Scroll upward
-      if ui.selected < ui.top:
-        ui.top = ui.selected
+      ui.top = min(ui.top, ui.selected)
 
   # DOWN
   elif key == 12:
@@ -73,7 +73,7 @@ while True:
 
   # SELECT / CENTER
   elif key == 30:
-    MENU[ui.selected].action()
+    MENU[ui.selected].script()
 
   # Wait for key release
   while eval('getkey') != -1:

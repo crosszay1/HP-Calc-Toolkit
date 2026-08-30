@@ -2,6 +2,7 @@
 
 import hpprime as h
 
+
 def main():
     print("Press any key:")
     while True:
