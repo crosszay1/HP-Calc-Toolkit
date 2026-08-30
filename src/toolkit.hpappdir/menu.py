@@ -18,6 +18,8 @@ MENU = {
   10: "10"
 }
 
+VISIBLE = 10 # Number of items visible at once
+
 import ui
 from ui import UI
 
@@ -39,7 +41,7 @@ while eval('getkey') != -1:
 
 while True:
 
-  draw_menu(VISIBLE=10, MENU=MENU)
+  draw_menu(VISIBLE=VISIBLE, MENU=MENU)
 
   key = eval('getkey')
 
