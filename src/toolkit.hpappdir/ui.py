@@ -15,8 +15,8 @@ class UI:
   def getinput(message="", title="Input", default=""): # Abstraction for getting user input
     while eval('getkey') != -1:
       pass
-    eval(f'{UI.INPUT_VAR}:="{default}"')
-    ok = eval(f'INPUT({UI.INPUT_VAR},"{title}","{message}","ENTER to confirm, ESC to cancel")')
+    eval(UI.INPUT_VAR + ':="' + str(default) + '"')
+    ok = eval('INPUT(' + UI.INPUT_VAR + ',"' + str(title) + '","' + str(message) + '","ENTER to confirm, ESC to cancel")')
 
     if not ok:
       return default
@@ -34,7 +34,7 @@ class UI:
     
     # Write text
     msg = message
-    eval(f'textout_p("{msg}",G1,75,100,4,#000000)')
+    eval('textout_p("' + str(msg) + '",G1,75,100,4,#000000)')
     eval('textout_p("Press any key to dismiss",G1,75,125,2,#555555)')
     
     #Push the buffer to the screen
@@ -67,11 +67,11 @@ class UI:
       if index == selected:
         fillrect(1, 5, y - 2, 310, 22, 0xCCCCCC, 0xCCCCCC)
         eval(
-          f'textout_p(">{item.display}",G1,15,{y},4,#000000)'
+          'textout_p(">' + str(item.display) + '",G1,15,' + str(y) + ',4,#000000)'
         )
       else:
         eval(
-          f'textout_p("{item.display}",G1,25,{y},4,#000000)'
+          'textout_p("' + str(item.display) + '",G1,25,' + str(y) + ',4,#000000)'
         )
 
     # Simple scroll indicators
