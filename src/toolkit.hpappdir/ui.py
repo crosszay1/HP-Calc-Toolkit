@@ -46,7 +46,6 @@ class UI:
 
   @staticmethod
   def draw_menu(VISIBLE, MENU):
-    global selected, top
 
     # Clear screen
     dimgrob(1, 320, 240, 0xFFFFFF)
