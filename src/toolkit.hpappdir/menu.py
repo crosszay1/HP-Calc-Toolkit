@@ -6,8 +6,6 @@ from ui import UI
 from uio import *
 from urandom import *
 
-
-# Constants
 class MenuItem:
   def __init__(self, name, display, script):
     self.name = name
@@ -49,32 +47,35 @@ while eval('getkey') != -1:
 
 
 while True:
+  try:
+    draw_menu(VISIBLE=VISIBLE, MENU=MENU)
 
-  draw_menu(VISIBLE=VISIBLE, MENU=MENU)
+    key = eval('getkey')
 
-  key = eval('getkey')
+    # UP
+    if key == 2:
+      if ui.selected > 0:
+        ui.selected -= 1
 
-  # UP
-  if key == 2:
-    if ui.selected > 0:
-      ui.selected -= 1
+        # Scroll upward
+        ui.top = min(ui.top, ui.selected)
 
-      # Scroll upward
-      ui.top = min(ui.top, ui.selected)
+    # DOWN
+    elif key == 12:
+      if ui.selected < len(MENU) - 1:
+        ui.selected += 1
 
-  # DOWN
-  elif key == 12:
-    if ui.selected < len(MENU) - 1:
-      ui.selected += 1
+        # Scroll downward
+        if ui.selected >= ui.top + VISIBLE:
+          ui.top = ui.selected - VISIBLE + 1
 
-      # Scroll downward
-      if ui.selected >= ui.top + VISIBLE:
-        ui.top = ui.selected - VISIBLE + 1
+    # SELECT / CENTER
+    elif key == 30:
+      MENU[ui.selected].script()
 
-  # SELECT / CENTER
-  elif key == 30:
-    MENU[ui.selected].script()
-
-  # Wait for key release
-  while eval('getkey') != -1:
-    pass
+    # Wait for key release
+    while eval('getkey') != -1:
+      pass
+  except KeyboardInterrupt:
+    print("Alright, goodbye!")
+    break #Gracefully exit without throwing an error
