@@ -1,7 +1,7 @@
 [project]
 name = "hp-calc-toolkit"
 version = "0.1.0"
-description = "Add your description here"
+description = "A set of tools for develoing on the HP prime G2 graphing caluclator."
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = []
