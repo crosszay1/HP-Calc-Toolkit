@@ -4,7 +4,11 @@ version = "0.1.0"
 description = "A set of tools for develoing on the HP prime G2 graphing caluclator."
 readme = "README.md"
 requires-python = ">=3.14"
-dependencies = []
+dependencies = [
+    "numpy>=2.5.2",
+    "opencv-python>=5.0.0.93",
+    "pillow>=12.3.0",
+]
 
 [dependency-groups]
 dev = [
